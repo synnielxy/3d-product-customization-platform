@@ -15,9 +15,9 @@ import { Dialog, DialogClose } from "@radix-ui/react-dialog";
 
 const components: { title: string; href: string; description: string }[] = [
     {
-        title: "Marketing Page",
-        href: "/marketing-page",
-        description: "Write some wavy here to get them to click.",
+        title: "Customization Page",
+        href: "/customization",
+        description: "Start customizing your product now!",
     },
 ];
 
@@ -30,7 +30,7 @@ export default function NavBar() {
     }
 
     return (
-        <div className="flex min-w-full fixed justify-between p-2 border-b z-10 dark:bg-black dark:bg-opacity-50 bg-white">
+        <div className="flex min-w-full fixed justify-between p-2 border-b z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex justify-between w-full min-[825px]:hidden">
                 <Dialog>
                     <SheetTrigger className="p-2 transition">

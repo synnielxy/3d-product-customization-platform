@@ -1,5 +1,6 @@
 import Provider from '@/app/provider'
 import { ThemeProvider } from "@/components/theme-provider"
+import {Layout} from '@/components/dom/Layout'
 import { Toaster } from "@/components/ui/sonner"
 import AuthWrapper from '@/components/wrapper/auth-wrapper'
 import { Analytics } from "@vercel/analytics/react"
@@ -58,13 +59,13 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              <Layout>{children}</Layout>
               <Toaster />
             </ThemeProvider>
           </Provider>
           <Analytics />
         </body>
       </html>
-    </AuthWrapper>
+   </AuthWrapper>
   )
 }

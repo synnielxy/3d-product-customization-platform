@@ -15,6 +15,7 @@ export async function actionTemplate() {
 
   try {
     let { data: user, error } = await supabase.from("user").select("*");
+    
 
     if (user) return user;
 

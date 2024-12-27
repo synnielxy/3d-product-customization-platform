@@ -71,3 +71,65 @@ model invoices {
   email           String
   user_id         String?
 }
+
+model customization_groups {
+  id                                                                             Int                     @id @default(autoincrement())
+  created_time                                                                   DateTime                @default(now())
+  updated_time                                                                   DateTime                @updatedAt
+  name                                                                           String
+  position                                                                       Int                     @default(0)
+  starting_asset                                                                 Int?
+  removable                                                                      Boolean                 @default(false)
+  color_palette                                                                  String?                 @db.Uuid
+  camera_placements                                                              String?
+  asset_groups                                                                   asset_groups[]
+  assets                                                                         customization_assets[]
+  camera_placements_customization_groups_camera_placementsTocamera_placements    camera_placements?      @relation("customization_groups_camera_placementsTocamera_placements", fields: [camera_placements], references: [name], onDelete: NoAction, onUpdate: NoAction)
+  customization_palettes                                                         customization_palettes? @relation(fields: [color_palette], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customization_assets_customization_groups_starting_assetTocustomization_assets customization_assets?   @relation("customization_groups_starting_assetTocustomization_assets", fields: [starting_asset], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model customization_assets {
+  id                                                                             Int                    @id @default(autoincrement())
+  created_time                                                                   DateTime               @default(now())
+  updated_time                                                                   DateTime               @updatedAt
+  name                                                                           String
+  thumbnail                                                                      String
+  url                                                                            String?
+  group_id                                                                       Int
+  asset_groups                                                                   asset_groups[]
+  group                                                                          customization_groups   @relation(fields: [group_id], references: [id])
+  customization_groups_customization_groups_starting_assetTocustomization_assets customization_groups[] @relation("customization_groups_starting_assetTocustomization_assets")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model asset_groups {
+  asset_id             Int
+  group_id             Int
+  asset_groups_pkey    String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  customization_assets customization_assets @relation(fields: [asset_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customization_groups customization_groups @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model camera_placements {
+  name                                                                           String                 @id
+  position                                                                       Json                   @db.Json
+  target                                                                         Json                   @db.Json
+  customization_groups_customization_groups_camera_placementsTocamera_placements customization_groups[] @relation("customization_groups_camera_placementsTocamera_placements")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model categories {
+  name       String   @id
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model customization_palettes {
+  id                   String                 @id(map: "customization_palettes_pkey1") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at           DateTime               @default(now()) @db.Timestamptz(6)
+  colors               Json?                  @db.Json
+  name                 String?
+  customization_groups customization_groups[]
+}

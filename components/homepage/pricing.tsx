@@ -166,37 +166,51 @@ export default function Pricing() {
 
   const plans = [
     {
-      title: "Basic",
-      monthlyPrice: 10,
-      yearlyPrice: 100,
-      description: "Essential features you need to get started",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3"],
+      title: "Starter",
+      monthlyPrice: 39,
+      yearlyPrice: 390,
+      description: "Essential 3D customization features to kick-start your interactive product experience",
+      features: [
+        "Basic real-time 3D previews",
+        "Up to 5 product models",
+        "Email support",
+      ],
       priceIdMonthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
       priceIdYearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
       actionLabel: "Get Started",
     },
     {
       title: "Pro",
-      monthlyPrice: 25,
-      yearlyPrice: 250,
-      description: "Perfect for owners of small & medium businessess",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3"],
-      actionLabel: "Get Started",
+      monthlyPrice: 89,
+      yearlyPrice: 890,
+      description: "Advanced 3D rendering and increased model capacity for growing businesses",
+      features: [
+        "High-res 3D rendering",
+        "Up to 20 product models",
+        "Priority email support",
+      ],
       priceIdMonthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
       priceIdYearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
+      actionLabel: "Get Started",
       popular: true,
     },
     {
       title: "Enterprise",
       price: "Custom",
-      description: "Dedicated support and infrastructure to fit your needs",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3", "Super Exclusive Feature"],
-      actionLabel: "Contact Sales",
+      description: "Tailored 3D solutions with dedicated support for large-scale or specialized needs",
+      features: [
+        "Unlimited product models",
+        "Custom integrations",
+        "Dedicated success manager",
+        "24/7 VIP support",
+      ],
       priceIdMonthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
       priceIdYearly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID,
+      actionLabel: "Contact Sales",
       exclusive: true,
     },
-  ]
+  ];
+
 
   return (
     <div>
